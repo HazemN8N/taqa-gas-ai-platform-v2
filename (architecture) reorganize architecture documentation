@@ -1,0 +1,104 @@
+[1mdiff --git a/database/migrations/002_enums.sql b/database/migrations/002_enums.sql[m
+[1mindex e69de29..b174622 100644[m
+[1m--- a/database/migrations/002_enums.sql[m
+[1m+++ b/database/migrations/002_enums.sql[m
+[36m@@ -0,0 +1,98 @@[m
+[32m+[m[32m-- ============================================================[m
+[32m+[m[32m-- Taqa Gas AI Platform V2[m
+[32m+[m[32m-- Migration: 002_enums.sql[m
+[32m+[m[32m-- Description: Create all application ENUM types[m
+[32m+[m[32m-- ============================================================[m
+[32m+[m
+[32m+[m[32mBEGIN;[m
+[32m+[m
+[32m+[m[32m-- ============================================================[m
+[32m+[m[32m-- Ticket Priority[m
+[32m+[m[32m-- ============================================================[m
+[32m+[m
+[32m+[m[32mDO $$[m
+[32m+[m[32mBEGIN[m
+[32m+[m[32m    IF NOT EXISTS ([m
+[32m+[m[32m        SELECT 1[m
+[32m+[m[32m        FROM pg_type[m
+[32m+[m[32m        WHERE typname = 'ticket_priority'[m
+[32m+[m[32m    ) THEN[m
+[32m+[m[32m        CREATE TYPE public.ticket_priority AS ENUM ([m
+[32m+[m[32m            'low',[m
+[32m+[m[32m            'normal',[m
+[32m+[m[32m            'high',[m
+[32m+[m[32m            'critical'[m
+[32m+[m[32m        );[m
+[32m+[m[32m    END IF;[m
+[32m+[m[32mEND $$;[m
+[32m+[m
+[32m+[m[32m-- ============================================================[m
+[32m+[m[32m-- Ticket Status[m
+[32m+[m[32m-- ============================================================[m
+[32m+[m
+[32m+[m[32mDO $$[m
+[32m+[m[32mBEGIN[m
+[32m+[m[32m    IF NOT EXISTS ([m
+[32m+[m[32m        SELECT 1[m
+[32m+[m[32m        FROM pg_type[m
+[32m+[m[32m        WHERE typname = 'ticket_status'[m
+[32m+[m[32m    ) THEN[m
+[32m+[m[32m        CREATE TYPE public.ticket_status AS ENUM ([m
+[32m+[m[32m            'new',[m
+[32m+[m[32m            'assigned',[m
+[32m+[m[32m            'in_progress',[m
+[32m+[m[32m            'waiting_customer',[m
+[32m+[m[32m            'waiting_dispatch',[m
+[32m+[m[32m            'resolved',[m
+[32m+[m[32m            'closed',[m
+[32m+[m[32m            'cancelled'[m
+[32m+[m[32m        );[m
+[32m+[m[32m    END IF;[m
+[32m+[m[32mEND $$;[m
+[32m+[m
+[32m+[m[32m-- ============================================================[m
+[32m+[m[32m-- Ticket Source[m
+[32m+[m[32m-- ============================================================[m
+[32m+[m
+[32m+[m[32mDO $$[m
+[32m+[m[32mBEGIN[m
+[32m+[m[32m    IF NOT EXISTS ([m
+[32m+[m[32m        SELECT 1[m
+[32m+[m[32m        FROM pg_type[m
+[32m+[m[32m        WHERE typname = 'ticket_source'[m
+[32m+[m[32m    ) THEN[m
+[32m+[m[32m        CREATE TYPE public.ticket_source AS ENUM ([m
+[32m+[m[32m            'telegram',[m
+[32m+[m[32m            'whatsapp',[m
+[32m+[m[32m            'web',[m
+[32m+[m[32m            'phone',[m
+[32m+[m[32m            'internal'[m
+[32m+[m[32m        );[m
+[32m+[m[32m    END IF;[m
+[32m+[m[32mEND $$;[m
+[32m+[m
+[32m+[m[32m-- ============================================================[m
+[32m+[m[32m-- Ticket Category[m
+[32m+[m[32m-- ============================================================[m
+[32m+[m
+[32m+[m[32mDO $$[m
+[32m+[m[32mBEGIN[m
+[32m+[m[32m    IF NOT EXISTS ([m
+[32m+[m[32m        SELECT 1[m
+[32m+[m[32m        FROM pg_type[m
+[32m+[m[32m        WHERE typname = 'ticket_type'[m
+[32m+[m[32m    ) THEN[m
+[32m+[m[32m        CREATE TYPE public.ticket_type AS ENUM ([m
+[32m+[m[32m            'emergency',[m
+[32m+[m[32m            'technical',[m
+[32m+[m[32m            'commercial',[m
+[32m+[m[32m            'billing',[m
+[32m+[m[32m            'complaint',[m
+[32m+[m[32m            'service_request',[m
+[32m+[m[32m            'inspection',[m
+[32m+[m[32m            'other'[m
+[32m+[m[32m        );[m
+[32m+[m[32m    END IF;[m
+[32m+[m[32mEND $$;[m
+[32m+[m
+[32m+[m[32mCOMMIT;[m
+\ No newline at end of file[m
